@@ -4,6 +4,8 @@
 #include<QFile>
 #include<QTextCodec>
 class Editor:public QPlainTextEdit{
+    Q_OBJECT
+
 public:
     Editor(QWidget *parent=nullptr);
     QString curFilePath;
@@ -11,10 +13,11 @@ public:
     void loadFile();  //load the file named by curFilePath
     QString getName();
     QTextCodec *code;
+    void codeFormatChange(const QString &format);
+    int formatIndex=0;
 private:
     void highlightCurrentLine();
 public slots:
-    void codeFormatChange(const QString &format);
     void on_cursorPositionChanged();
 };
 

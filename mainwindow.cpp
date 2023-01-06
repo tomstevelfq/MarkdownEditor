@@ -72,11 +72,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
-    tabEditor *tab=new tabEditor();
+    tab=new tabEditor();
     Editor* editor=new Editor();
     verticalLayout->addWidget(tab);
-
-    connect(combox,static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),editor,&Editor::codeFormatChange);
+    connect(combox,static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatChange);
+    connect(combox,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatIndexChange);
+    connect(tab,&tabEditor::tabChanged,combox,&QComboBox::setCurrentIndex);
 }
 
 MainWindow::~MainWindow()
@@ -85,12 +86,10 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::newFile(){
-    QString fileName=QFileDialog::getOpenFileName(this,"请选择文件","./","text (*.txt)");
-    QTextStream qout(stdout);
-    qout<<fileName<<endl;
+    tab->add(new Editor());
 }
 
 void MainWindow::open(){
-    editor->curFilePath=QFileDialog::getOpenFileName(this,"请选择文件","./","text (*.txt)");
-    editor->loadFile();
+    QString curFilePath=QFileDialog::getOpenFileName(this,"请选择文件","./","text (*.txt)");
+    tab->openFile(curFilePath);
 }

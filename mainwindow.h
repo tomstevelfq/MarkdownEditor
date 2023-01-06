@@ -20,6 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    tabEditor *tab;
 private slots:
     void newFile();
     void open();

@@ -30,8 +30,8 @@ SOURCES += \
     tabeditor.cpp
 
 HEADERS += \
-        mainwindow.h \
     editor.h \
+    mainwindow.h \
     tabeditor.h
 
 FORMS += \
