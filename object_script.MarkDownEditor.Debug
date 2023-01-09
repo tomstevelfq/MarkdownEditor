@@ -1,0 +1,12 @@
+INPUT(
+./debug\editor.o
+./debug\main.o
+./debug\mainwindow.o
+./debug\tabeditor.o
+./debug\linenumberarea.o
+./debug\qrc_resources.o
+./debug\moc_editor.o
+./debug\moc_mainwindow.o
+./debug\moc_tabeditor.o
+./debug\moc_linenumberarea.o
+);

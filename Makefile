@@ -104,14 +104,10 @@ Makefile: MarkDownEditor.pro C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++/qmak
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_bluetooth.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_bootstrap_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_charts.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_charts_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_concurrent.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_concurrent_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_core.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_core_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_datavisualization.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_datavisualization_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_dbus.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_dbus_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_designer.pri \
@@ -136,8 +132,6 @@ Makefile: MarkDownEditor.pro C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++/qmak
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_network.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_network_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_networkauth.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_networkauth_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_nfc.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_nfc_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_opengl.pri \
@@ -150,8 +144,6 @@ Makefile: MarkDownEditor.pro C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++/qmak
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_positioning_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_printsupport.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_printsupport_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_purchasing.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_purchasing_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_qml.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_qml_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_qmldebug_private.pri \
@@ -167,14 +159,6 @@ Makefile: MarkDownEditor.pro C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++/qmak
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quickwidgets.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_remoteobjects.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_remoteobjects_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_repparser.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_repparser_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_script.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_script_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scripttools.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scripttools_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scxml.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scxml_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_sensors.pri \
@@ -189,8 +173,6 @@ Makefile: MarkDownEditor.pro C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++/qmak
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_svg_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_testlib.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_testlib_private.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_texttospeech.pri \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_texttospeech_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_theme_support_private.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_uiplugin.pri \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_uitools.pri \
@@ -282,14 +264,10 @@ C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_axserver_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_bluetooth.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_bluetooth_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_bootstrap_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_charts.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_charts_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_concurrent.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_concurrent_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_core.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_core_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_datavisualization.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_datavisualization_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_dbus.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_dbus_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_designer.pri:
@@ -314,8 +292,6 @@ C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_multimediawidgets.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_network.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_network_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_networkauth.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_networkauth_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_nfc.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_nfc_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_opengl.pri:
@@ -328,8 +304,6 @@ C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_positioning.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_positioning_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_printsupport.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_printsupport_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_purchasing.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_purchasing_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_qml.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_qml_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_qmldebug_private.pri:
@@ -345,14 +319,6 @@ C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quickparticles_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quickwidgets.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_remoteobjects.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_remoteobjects_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_repparser.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_repparser_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_script.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_script_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scripttools.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scripttools_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scxml.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_scxml_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_sensors.pri:
@@ -367,8 +333,6 @@ C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_svg.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_svg_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_testlib.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_testlib_private.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_texttospeech.pri:
-C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_texttospeech_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_theme_support_private.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_uiplugin.pri:
 C:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/modules/qt_lib_uitools.pri:

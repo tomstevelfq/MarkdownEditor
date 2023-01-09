@@ -1,0 +1,12 @@
+INPUT(
+./release\editor.o
+./release\main.o
+./release\mainwindow.o
+./release\tabeditor.o
+./release\linenumberarea.o
+./release\qrc_resources.o
+./release\moc_editor.o
+./release\moc_mainwindow.o
+./release\moc_tabeditor.o
+./release\moc_linenumberarea.o
+);

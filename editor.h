@@ -3,6 +3,7 @@
 #include<QPlainTextEdit>
 #include<QFile>
 #include<QTextCodec>
+class LineNumberArea;
 class Editor:public QPlainTextEdit{
     Q_OBJECT
 
@@ -15,10 +16,25 @@ public:
     QTextCodec *code;
     void codeFormatChange(const QString &format);
     int formatIndex=0;
+    int currentColumn=1;
+    void lineNumberPaint(QPaintEvent *event);
+    void setLineNumberFont(Qt::GlobalColor);
 private:
     void highlightCurrentLine();
+    int getLineNumberWidth();
+    LineNumberArea *lineNumber;
+    int lineNumberPadding=25;
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
 public slots:
     void on_cursorPositionChanged();
+    void updateLineNumberWidth();
+    void updateLineNumberArea(const QRect&,int);
+    void saveAndSaveAs();
+signals:
+    columnChanged(int);
 };
 
 #endif // EDITOR_H

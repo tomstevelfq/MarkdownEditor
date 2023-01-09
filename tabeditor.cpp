@@ -14,6 +14,9 @@ void tabEditor::add(Editor *editor){
 }
 
 void tabEditor::openFile(QString filePath){
+    if(filePath==""){//file has not been opened
+        return;
+    }
     Editor* curEditor=static_cast<Editor*>(currentWidget());
     if(curEditor->getName()=="untitled"){
         curEditor->loadFile(filePath);
@@ -32,7 +35,9 @@ QString tabEditor::getFileName(QString filePath){
 }
 
 void tabEditor::on_tabClose(int index){
-    removeTab(index);
+    if(count()>1){
+        removeTab(index);//remove tab only when tabs are not only one
+    }
 }
 
 void tabEditor::code_formatChange(const QString& format){

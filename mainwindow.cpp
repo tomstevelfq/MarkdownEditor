@@ -69,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(pNew,&QAction::triggered,this,&MainWindow::newFile);
     connect(pOpen,&QAction::triggered,this,&MainWindow::open);
+    connect(pExit,&QAction::triggered,this,&MainWindow::close);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -78,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(combox,static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatChange);
     connect(combox,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatIndexChange);
     connect(tab,&tabEditor::tabChanged,combox,&QComboBox::setCurrentIndex);
+    connect(pSave,&QAction::triggered,editor,&Editor::saveAndSaveAs);
+    connect(pSaveAs,&QAction::triggered,editor,&Editor::saveAndSaveAs);
 }
 
 MainWindow::~MainWindow()

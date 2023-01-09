@@ -131,4 +131,5 @@ void Editor::saveAndSaveAs(){
     auto sen=sender();
     QTextStream qout(stdout);
     qout<<sen->objectName()<<endl;
+    qout<<sen==
 }

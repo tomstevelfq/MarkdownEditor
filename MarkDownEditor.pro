@@ -24,18 +24,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
     editor.cpp \
-    tabeditor.cpp
+    main.cpp \
+    mainwindow.cpp \
+    tabeditor.cpp \
+    linenumberarea.cpp
 
 HEADERS += \
     editor.h \
     mainwindow.h \
-    tabeditor.h
+    tabeditor.h \
+    ui_mainwindow.h \
+    linenumberarea.h
 
 FORMS += \
         mainwindow.ui
 
 RESOURCES += \
     resources.qrc
+
