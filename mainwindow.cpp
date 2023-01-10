@@ -79,8 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(combox,static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatChange);
     connect(combox,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatIndexChange);
     connect(tab,&tabEditor::tabChanged,combox,&QComboBox::setCurrentIndex);
-    connect(pSave,&QAction::triggered,editor,&Editor::saveAndSaveAs);
-    connect(pSaveAs,&QAction::triggered,editor,&Editor::saveAndSaveAs);
+    connect(pSave,&QAction::triggered,tab,&tabEditor::saveFile);
+    connect(pSaveAs,&QAction::triggered,tab,&tabEditor::saveFileAs);
 }
 
 MainWindow::~MainWindow()

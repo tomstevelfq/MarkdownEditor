@@ -16,9 +16,11 @@ public:
     QTextCodec *code;
     void codeFormatChange(const QString &format);
     int formatIndex=0;
+    int tabIndex;
     int currentColumn=1;
     void lineNumberPaint(QPaintEvent *event);
     void setLineNumberFont(Qt::GlobalColor);
+    void setCurFilePath(QString);
 private:
     void highlightCurrentLine();
     int getLineNumberWidth();
@@ -32,9 +34,9 @@ public slots:
     void on_cursorPositionChanged();
     void updateLineNumberWidth();
     void updateLineNumberArea(const QRect&,int);
-    void saveAndSaveAs();
 signals:
-    columnChanged(int);
+    void columnChanged(int);
+    void tabNameChange(int,QString);
 };
 
 #endif // EDITOR_H

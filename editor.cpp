@@ -7,6 +7,7 @@
 #include<QPainter>
 #include<QTextBlock>
 #include"linenumberarea.h"
+#include<QFileDialog>
 
 Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -63,7 +64,7 @@ void Editor::on_cursorPositionChanged(){
     highlightCurrentLine();
     QTextStream qout(stdout);
     currentColumn=textCursor().positionInBlock();
-    //qout<<blockCount()<<endl;
+    qout<<toPlainText()<<endl;
 }
 
 QString Editor::getName(){
@@ -90,7 +91,7 @@ void Editor::lineNumberPaint(QPaintEvent *event){
         if(block.isVisible()&&bottom>=event->rect().top()){
             QString num=QString::number(blockNumber+1);
             painter.setPen(lineNumber->lineNumberColor);
-            painter.drawText(0,top,lineNumber->width()*1,fontMetrics().height(),Qt::AlignRight,num);
+            painter.drawText(0,top,lineNumber->width()*1,fontMetrics().height(),Qt::AlignRight|Qt::AlignBottom,num);
         }
         block=block.next();
         top=bottom;
@@ -105,7 +106,7 @@ void Editor::updateLineNumberWidth(){
 
 void Editor::updateLineNumberArea(const QRect& drawnRect,int pixels){
     QTextStream qout(stdout);
-    qout<<pixels<<endl;
+    //qout<<pixels<<endl;
     if(pixels!=0){
         lineNumber->scroll(0,pixels);
     }else{
@@ -127,8 +128,7 @@ void Editor::setLineNumberFont(Qt::GlobalColor color){
     lineNumber->lineNumberColor=color;
 }
 
-void Editor::saveAndSaveAs(){
-    auto sen=sender();
-    QTextStream qout(stdout);
-    qout<<sen->objectName()<<endl;
+void Editor::setCurFilePath(QString filePath){
+    this->curFilePath=filePath;
 }
+

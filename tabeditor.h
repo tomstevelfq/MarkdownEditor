@@ -14,8 +14,11 @@ public slots:
     void openFile(QString filePath);
     void on_tabClose(int index);
     void on_tabChange(int index);
+    void on_tabNameChange(int,QString);
     void code_formatChange(const QString& format);
     void code_formatIndexChange(int comboxIndex);
+    void saveFile();
+    void saveFileAs();
 private:
     QString getFileName(QString filePath);
 
