@@ -4,8 +4,10 @@
         <file>icons/安全.svg</file>
         <file>icons/保存.svg</file>
         <file>icons/编辑.svg</file>
+        <file>icons/撤销.svg</file>
         <file>icons/打印.svg</file>
         <file>icons/复制.svg</file>
+        <file>icons/剪切.svg</file>
         <file>icons/另存为.svg</file>
         <file>icons/搜索.svg</file>
         <file>icons/提示.svg</file>
@@ -14,5 +16,7 @@
         <file>icons/向右.svg</file>
         <file>icons/向左.svg</file>
         <file>icons/新建.svg</file>
+        <file>icons/粘贴.svg</file>
+        <file>icons/重做.png</file>
     </qresource>
 </RCC>

@@ -21,11 +21,14 @@ public:
     void lineNumberPaint(QPaintEvent *event);
     void setLineNumberFont(Qt::GlobalColor);
     void setCurFilePath(QString);
+    void launchFontDialog();
+    void loadFont(QString family, QFont::StyleHint styleHint, bool fixedPitch, int pointSize, int tabStopWidth);
 private:
     void highlightCurrentLine();
     int getLineNumberWidth();
     LineNumberArea *lineNumber;
     int lineNumberPadding=25;
+    QFont font;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

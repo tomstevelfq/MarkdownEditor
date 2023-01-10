@@ -8,6 +8,7 @@
 #include<QTextBlock>
 #include"linenumberarea.h"
 #include<QFileDialog>
+#include<QFontDialog>
 
 Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -132,3 +133,18 @@ void Editor::setCurFilePath(QString filePath){
     this->curFilePath=filePath;
 }
 
+void Editor::launchFontDialog(){
+    bool userChoose;
+    QFont font=QFontDialog::getFont(&userChoose,QFont("Courier", 10), this);
+    if(userChoose){
+        loadFont(font.family(),QFont::Monospace,true,font.pointSize(),5);
+    }
+}
+
+void Editor::loadFont(QString family,QFont::StyleHint styleHint,bool fixedPitch,int fontSize,int tabWidth){
+    font.setFamily(family);
+    font.setStyleHint(styleHint);
+    font.setFixedPitch(fixedPitch);
+    font.setPointSize(fontSize);
+    setFont(font);
+}

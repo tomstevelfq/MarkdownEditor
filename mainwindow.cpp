@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMenuBar* mBar=menuBar();
     QMenu* pFile=mBar->addMenu("文件");
     QMenu *pEdit=mBar->addMenu("编辑");
-    QMenu *pFromat=mBar->addMenu("格式");
+    QMenu *pFormat=mBar->addMenu("格式");
     QMenu *pView=mBar->addMenu("视图");
 
     QAction* pNew=pFile->addAction("新建");
@@ -30,6 +30,36 @@ MainWindow::MainWindow(QWidget *parent) :
     QAction* pSaveAs=pFile->addAction("另存为");
     QAction* pPrint=pFile->addAction("打印");
     QAction* pExit=pFile->addAction("退出");
+    QAction *pUndo=pEdit->addAction("撤销");
+    QAction *pRedo=pEdit->addAction("重做");
+    QAction *pCut=pEdit->addAction("剪切");
+    QAction *pCopy=pEdit->addAction("复制");
+    QAction *pPaste=pEdit->addAction("粘贴");
+    QAction *pFind=pEdit->addAction("查找");
+    QAction *pReplace=pEdit->addAction("替换...");
+    QAction *pFont=pFormat->addAction("字体");
+    //QAction *pLanguage=pFormat->addAction("语言");
+    QMenu *menuLanguage=pFormat->addMenu("语言");
+    QAction *pLangPython=menuLanguage->addAction("python");
+    QAction *pLangCpp=menuLanguage->addAction("cpp");
+    QAction *pLangJava=menuLanguage->addAction("java");
+    pLangPython->setCheckable(true);
+    pLangCpp->setCheckable(true);
+    pLangJava->setCheckable(true);
+    pFormat->addAction(menuLanguage->menuAction());
+    QActionGroup *langGroup=new QActionGroup(this);
+    langGroup->setExclusive(true);
+    langGroup->addAction(pLangPython);
+    langGroup->addAction(pLangCpp);
+    langGroup->addAction(pLangJava);
+    QAction *pIndent=pFormat->addAction("缩进");
+    QAction *pWrap=pFormat->addAction("换行");
+    QAction *pStatus=pView->addAction("状态栏");
+    pIndent->setCheckable(true);
+    pIndent->setChecked(true);
+    pWrap->setCheckable(true);
+    pStatus->setCheckable(true);
+    pStatus->setChecked(true);
 
     QToolBar* toolBar=new QToolBar("toolBar",this);
     addToolBar(toolBar);
@@ -46,6 +76,20 @@ MainWindow::MainWindow(QWidget *parent) :
     pPrint->setIcon(icon5);
     QIcon icon6(":/files/icons/退出.svg");
     pExit->setIcon(icon6);
+    QIcon icon7(":/files/icons/撤销.svg");
+    pUndo->setIcon(icon7);
+    QIcon icon8(":/files/icons/重做.png");
+    pRedo->setIcon(icon8);
+    QIcon icon9(":/files/icons/剪切.svg");
+    pCut->setIcon(icon9);
+    QIcon icon10(":/files/icons/复制.svg");
+    pCopy->setIcon(icon10);
+    QIcon icon11(":/files/icons/粘贴.svg");
+    pPaste->setIcon(icon11);
+    QIcon icon12(":/files/icons/搜索.svg");
+    pFind->setIcon(icon12);
+    //QIcon icon13(":/files/icons/替换.svg");
+    //pReplace->setIcon(icon13);
 
 
     toolBar->setFloatable(false);
@@ -81,6 +125,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(tab,&tabEditor::tabChanged,combox,&QComboBox::setCurrentIndex);
     connect(pSave,&QAction::triggered,tab,&tabEditor::saveFile);
     connect(pSaveAs,&QAction::triggered,tab,&tabEditor::saveFileAs);
+    connect(pFont,&QAction::triggered,this,&MainWindow::fontChoose);
 }
 
 MainWindow::~MainWindow()
@@ -95,4 +140,9 @@ void MainWindow::newFile(){
 void MainWindow::open(){
     QString curFilePath=QFileDialog::getOpenFileName(this,"请选择文件","./","text (*.txt)");
     tab->openFile(curFilePath);
+}
+
+void MainWindow::fontChoose(){
+    Editor *editor=static_cast<Editor*>(tab->currentWidget());
+    editor->launchFontDialog();
 }

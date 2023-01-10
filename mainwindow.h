@@ -24,6 +24,7 @@ private:
 private slots:
     void newFile();
     void open();
+    void fontChoose();
 //    void save();
 //    void saveAs();
 //    void print();
