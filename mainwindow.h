@@ -26,6 +26,7 @@ public:
     QAction *pStatus;
     void toggle_undo(bool);
     void toggle_redo(bool);
+    void toggle_copyCut(bool);
     ~MainWindow();
 
 private:
@@ -41,6 +42,8 @@ private:
     QAction* pWrap;
     QAction *pUndo;
     QAction *pRedo;
+    QAction *pCut;
+    QAction *pCopy;
 private slots:
     void newFile();
     void open();
@@ -52,6 +55,9 @@ private slots:
     void on_wrapTrigger();
     void on_redoTrigger();
     void on_undoTrigger();
+    void on_copyTrigger();
+    void on_cutTrigger();
+    void on_pasteTrigger();
 //    void save();
 //    void saveAs();
 //    void print();

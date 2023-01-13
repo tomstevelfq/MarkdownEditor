@@ -33,8 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
     pUndo=pEdit->addAction("撤销");
     pRedo=pEdit->addAction("重做");
     pRedo->setEnabled(false);
-    QAction *pCut=pEdit->addAction("剪切");
-    QAction *pCopy=pEdit->addAction("复制");
+    pCut=pEdit->addAction("剪切");
+    pCopy=pEdit->addAction("复制");
     QAction *pPaste=pEdit->addAction("粘贴");
     QAction *pFind=pEdit->addAction("查找");
     QAction *pReplace=pEdit->addAction("替换...");
@@ -120,7 +120,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pWrap,&QAction::triggered,this,&MainWindow::on_wrapTrigger);
     connect(pRedo,&QAction::triggered,this,&MainWindow::on_redoTrigger);
     connect(pUndo,&QAction::triggered,this,&MainWindow::on_undoTrigger);
-
+    connect(pCopy,&QAction::triggered,this,&MainWindow::on_copyTrigger);
+    connect(pCut,&QAction::triggered,this,&MainWindow::on_cutTrigger);
+    connect(pPaste,&QAction::triggered,this,&MainWindow::on_pasteTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -233,4 +235,25 @@ void MainWindow::toggle_redo(bool available){
 
 void MainWindow::toggle_undo(bool available){
     pUndo->setEnabled(available);
+}
+
+void MainWindow::toggle_copyCut(bool copyCut){
+    pCut->setEnabled(copyCut);
+    pCopy->setEnabled(copyCut);
+}
+
+void MainWindow::on_cutTrigger(){
+    if(pCut->isEnabled()){
+        static_cast<Editor*>(tab->currentWidget())->cut();
+    }
+}
+
+void MainWindow::on_copyTrigger(){
+    if(pCopy->isEnabled()){
+        static_cast<Editor*>(tab->currentWidget())->copy();
+    }
+}
+
+void MainWindow::on_pasteTrigger(){
+    static_cast<Editor*>(tab->currentWidget())->paste();
 }
