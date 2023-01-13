@@ -107,7 +107,6 @@ void Editor::updateLineNumberWidth(){
 
 void Editor::updateLineNumberArea(const QRect& drawnRect,int pixels){
     QTextStream qout(stdout);
-    //qout<<pixels<<endl;
     if(pixels!=0){
         lineNumber->scroll(0,pixels);
     }else{
@@ -147,4 +146,12 @@ void Editor::loadFont(QString family,QFont::StyleHint styleHint,bool fixedPitch,
     font.setFixedPitch(fixedPitch);
     font.setPointSize(fontSize);
     setFont(font);
+}
+
+void Editor::langChanged(QString lang){
+    language=lang;
+}
+
+QString Editor::getLang(){
+    return language;
 }

@@ -19,11 +19,14 @@ public slots:
     void code_formatIndexChange(int comboxIndex);
     void saveFile();
     void saveFileAs();
+    void on_textChanged();
+    void on_langChanged(QString);
 private:
     QString getFileName(QString filePath);
 
 signals:
     void tabChanged(int);//change the index of combox list to show curfile's codec name
+    void textChanged(Editor*);
 };
 
 #endif // TABEDITOR_H

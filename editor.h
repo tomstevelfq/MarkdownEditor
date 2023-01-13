@@ -23,6 +23,9 @@ public:
     void setCurFilePath(QString);
     void launchFontDialog();
     void loadFont(QString family, QFont::StyleHint styleHint, bool fixedPitch, int pointSize, int tabStopWidth);
+    void langChanged(QString);
+    QString getLang();
+    QString language;
 private:
     void highlightCurrentLine();
     int getLineNumberWidth();

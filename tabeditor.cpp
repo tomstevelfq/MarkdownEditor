@@ -13,6 +13,7 @@ tabEditor::tabEditor(QWidget *parent):QTabWidget(parent)
 
 void tabEditor::add(Editor *editor){
     connect(editor,&Editor::tabNameChange,this,&tabEditor::on_tabNameChange);
+    connect(editor,&Editor::textChanged,this,&tabEditor::on_textChanged);
     addTab(editor,editor->getName());
     setCurrentWidget(editor);
     editor->tabIndex=currentIndex();
@@ -107,4 +108,14 @@ void tabEditor::saveFileAs(){
     qout<<str;
     pFile->close();
     setTabText(currentIndex(),filePath);
+}
+
+void tabEditor::on_textChanged(){
+    QTextStream qout(stdout);
+    qout<<"hello haha"<<endl;
+    emit(textChanged(static_cast<Editor*>(currentWidget())));
+}
+
+void tabEditor::on_langChanged(QString lang){
+    static_cast<Editor*>(currentWidget())->langChanged(lang);
 }

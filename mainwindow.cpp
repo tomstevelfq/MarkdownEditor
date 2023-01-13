@@ -38,11 +38,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QAction *pFind=pEdit->addAction("查找");
     QAction *pReplace=pEdit->addAction("替换...");
     QAction *pFont=pFormat->addAction("字体");
-    //QAction *pLanguage=pFormat->addAction("语言");
     QMenu *menuLanguage=pFormat->addMenu("语言");
-    QAction *pLangPython=menuLanguage->addAction("python");
-    QAction *pLangCpp=menuLanguage->addAction("cpp");
-    QAction *pLangJava=menuLanguage->addAction("java");
+    pIndent=pFormat->addAction("缩进");
+    pWrap=pFormat->addAction("换行");
+    pLangPython=menuLanguage->addAction("python");
+    pLangCpp=menuLanguage->addAction("cpp");
+    pLangJava=menuLanguage->addAction("java");
     pLangPython->setCheckable(true);
     pLangCpp->setCheckable(true);
     pLangJava->setCheckable(true);
@@ -52,14 +53,14 @@ MainWindow::MainWindow(QWidget *parent) :
     langGroup->addAction(pLangPython);
     langGroup->addAction(pLangCpp);
     langGroup->addAction(pLangJava);
-    QAction *pIndent=pFormat->addAction("缩进");
-    QAction *pWrap=pFormat->addAction("换行");
-    QAction *pStatus=pView->addAction("状态栏");
+    connect(langGroup,&QActionGroup::triggered,this,&MainWindow::on_langSelected);
+    pStatus=pView->addAction("状态栏");
     pIndent->setCheckable(true);
     pIndent->setChecked(true);
     pWrap->setCheckable(true);
     pStatus->setCheckable(true);
     pStatus->setChecked(true);
+    pWrap->setChecked(false);
 
     QToolBar* toolBar=new QToolBar("toolBar",this);
     addToolBar(toolBar);
@@ -114,6 +115,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pNew,&QAction::triggered,this,&MainWindow::newFile);
     connect(pOpen,&QAction::triggered,this,&MainWindow::open);
     connect(pExit,&QAction::triggered,this,&MainWindow::close);
+    connect(pIndent,&QAction::triggered,this,&MainWindow::on_indentTrigger);
+    connect(pWrap,&QAction::triggered,this,&MainWindow::on_wrapTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -126,6 +129,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pSave,&QAction::triggered,tab,&tabEditor::saveFile);
     connect(pSaveAs,&QAction::triggered,tab,&tabEditor::saveFileAs);
     connect(pFont,&QAction::triggered,this,&MainWindow::fontChoose);
+    connect(pStatus,&QAction::triggered,this,&MainWindow::on_statusBarTrigger);
+
+    statusBar=new QStatusBar(this);
+    this->setStatusBar(statusBar);
+    initStatusBar();
+    connect(tab,&tabEditor::textChanged,this,&MainWindow::on_textChanged);
+    on_textChanged(static_cast<Editor*>(tab->currentWidget()));
+    initLangMap();
 }
 
 MainWindow::~MainWindow()
@@ -145,4 +156,61 @@ void MainWindow::open(){
 void MainWindow::fontChoose(){
     Editor *editor=static_cast<Editor*>(tab->currentWidget());
     editor->launchFontDialog();
+}
+
+void MainWindow::initStatusBar(){
+    languageLabel=new QLabel("语言：未选择");
+    wordLabel=new QLabel("字数:");
+    charLabel=new QLabel("字符数:");
+    wordCountLabel=new QLabel();
+    charCountLabel=new QLabel();
+    statusBar->setStyleSheet("margin-left:15px");
+    statusBar->addWidget(languageLabel);
+    statusBar->addPermanentWidget(wordLabel);
+    statusBar->addPermanentWidget(wordCountLabel);
+    statusBar->addPermanentWidget(charLabel);
+    statusBar->addPermanentWidget(charCountLabel);
+}
+
+void MainWindow::initLangMap(){
+    langMap[pLangPython]="python";
+    langMap[pLangCpp]="cpp";
+    langMap[pLangJava]="java";
+}
+
+void MainWindow::on_textChanged(Editor *editor){
+    int letterNum=editor->toPlainText().length();
+    wordCountLabel->setText(QString::number(letterNum));
+    charCountLabel->setText(QString::number(letterNum));
+}
+
+void MainWindow::on_statusBarTrigger(){
+    if(pStatus->isChecked()){
+        statusBar->setVisible(true);
+    }else{
+        statusBar->setVisible(false);
+    }
+}
+
+void MainWindow::on_langSelected(QAction* langAction){
+    QString lang=langMap[langAction];
+    if(lang==static_cast<Editor*>(tab->currentWidget())->getLang()){
+        return;
+    }else{
+        static_cast<Editor*>(tab->currentWidget())->langChanged(lang);
+        languageLabel->setText(lang);
+    }
+}
+
+void MainWindow::on_wrapTrigger(){
+    if(pWrap->isChecked()){
+        static_cast<Editor*>(tab->currentWidget())->setWordWrapMode(QTextOption::WordWrap);
+        static_cast<Editor*>(tab->currentWidget())->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+    }else{
+        static_cast<Editor*>(tab->currentWidget())->setWordWrapMode(QTextOption::NoWrap);
+    }
+}
+
+void MainWindow::on_indentTrigger(){
+
 }
