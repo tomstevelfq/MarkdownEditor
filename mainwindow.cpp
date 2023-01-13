@@ -30,8 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QAction* pSaveAs=pFile->addAction("另存为");
     QAction* pPrint=pFile->addAction("打印");
     QAction* pExit=pFile->addAction("退出");
-    QAction *pUndo=pEdit->addAction("撤销");
-    QAction *pRedo=pEdit->addAction("重做");
+    pUndo=pEdit->addAction("撤销");
+    pRedo=pEdit->addAction("重做");
+    pRedo->setEnabled(false);
     QAction *pCut=pEdit->addAction("剪切");
     QAction *pCopy=pEdit->addAction("复制");
     QAction *pPaste=pEdit->addAction("粘贴");
@@ -117,6 +118,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pExit,&QAction::triggered,this,&MainWindow::close);
     connect(pIndent,&QAction::triggered,this,&MainWindow::on_indentTrigger);
     connect(pWrap,&QAction::triggered,this,&MainWindow::on_wrapTrigger);
+    connect(pRedo,&QAction::triggered,this,&MainWindow::on_redoTrigger);
+    connect(pUndo,&QAction::triggered,this,&MainWindow::on_undoTrigger);
+
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -213,4 +217,20 @@ void MainWindow::on_wrapTrigger(){
 
 void MainWindow::on_indentTrigger(){
 
+}
+
+void MainWindow::on_redoTrigger(){
+    static_cast<Editor*>(tab->currentWidget())->redo();
+}
+
+void MainWindow::on_undoTrigger(){
+    static_cast<Editor*>(tab->currentWidget())->undo();
+}
+
+void MainWindow::toggle_redo(bool available){
+    pRedo->setEnabled(available);
+}
+
+void MainWindow::toggle_undo(bool available){
+    pUndo->setEnabled(available);
 }

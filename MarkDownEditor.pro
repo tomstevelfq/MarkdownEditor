@@ -28,14 +28,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     tabeditor.cpp \
-    linenumberarea.cpp
+    linenumberarea.cpp \
+    utils.cpp
 
 HEADERS += \
     editor.h \
     mainwindow.h \
     tabeditor.h \
     ui_mainwindow.h \
-    linenumberarea.h
+    linenumberarea.h \
+    utils.h
 
 FORMS += \
         mainwindow.ui

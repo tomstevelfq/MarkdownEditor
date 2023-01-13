@@ -9,6 +9,8 @@
 #include"linenumberarea.h"
 #include<QFileDialog>
 #include<QFontDialog>
+#include"mainwindow.h"
+#include"utils.h"
 
 Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -21,6 +23,8 @@ Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     connect(this,&Editor::cursorPositionChanged,this,&Editor::on_cursorPositionChanged);
     connect(this,&Editor::updateRequest,this,&Editor::updateLineNumberArea);
     connect(this,&Editor::blockCountChanged,this,&Editor::updateLineNumberWidth);
+    connect(this,&Editor::redoAvailable,this,&Editor::toggleRedo);
+    connect(this,&Editor::undoAvailable,this,&Editor::toggleUndo);
     this->setStyleSheet("color:darkMagenta");
 
     updateLineNumberWidth();
@@ -154,4 +158,14 @@ void Editor::langChanged(QString lang){
 
 QString Editor::getLang(){
     return language;
+}
+
+void Editor::toggleRedo(bool available){
+    MainWindow *wid=static_cast<MainWindow*>(objMap["MainWindow"]);
+    wid->toggle_redo(available);
+}
+
+void Editor::toggleUndo(bool available){
+    MainWindow *wid=static_cast<MainWindow*>(objMap["MainWindow"]);
+    wid->toggle_undo(available);
 }

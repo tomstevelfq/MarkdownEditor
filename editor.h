@@ -40,6 +40,8 @@ public slots:
     void on_cursorPositionChanged();
     void updateLineNumberWidth();
     void updateLineNumberArea(const QRect&,int);
+    void toggleRedo(bool);
+    void toggleUndo(bool);
 signals:
     void columnChanged(int);
     void tabNameChange(int,QString);

@@ -24,6 +24,8 @@ public:
     QLabel* wordLabel;
     QLabel* charLabel;
     QAction *pStatus;
+    void toggle_undo(bool);
+    void toggle_redo(bool);
     ~MainWindow();
 
 private:
@@ -37,6 +39,8 @@ private:
     QAction *pLangJava;
     QAction* pIndent;
     QAction* pWrap;
+    QAction *pUndo;
+    QAction *pRedo;
 private slots:
     void newFile();
     void open();
@@ -46,6 +50,8 @@ private slots:
     void on_langSelected(QAction*);
     void on_indentTrigger();
     void on_wrapTrigger();
+    void on_redoTrigger();
+    void on_undoTrigger();
 //    void save();
 //    void saveAs();
 //    void print();

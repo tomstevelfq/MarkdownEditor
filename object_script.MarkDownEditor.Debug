@@ -4,6 +4,7 @@ INPUT(
 ./debug\mainwindow.o
 ./debug\tabeditor.o
 ./debug\linenumberarea.o
+./debug\utils.o
 ./debug\qrc_resources.o
 ./debug\moc_editor.o
 ./debug\moc_mainwindow.o
