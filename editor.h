@@ -26,8 +26,8 @@ public:
     void langChanged(QString);
     QString getLang();
     QString language;
-    void find(QString,bool,bool);
-    void replace(QString,QString,bool,bool);
+    bool find(QString,bool,bool);
+    bool replace(QString,QString,bool,bool);
     void replaceAll(QString,QString,bool,bool);
 private:
     void highlightCurrentLine();

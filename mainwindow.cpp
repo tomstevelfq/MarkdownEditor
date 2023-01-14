@@ -132,6 +132,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pPaste,&QAction::triggered,this,&MainWindow::on_pasteTrigger);
     connect(pFind,&QAction::triggered,this,&MainWindow::on_findTrigger);
     connect(findDialog,&FindDialog::start_find,this,&MainWindow::on_startFindTrigger);
+    connect(findDialog,&FindDialog::start_replace,this,&MainWindow::on_startReplaceTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -278,4 +279,8 @@ void MainWindow::on_findTrigger(){//slot function of menubar
 
 void MainWindow::on_startFindTrigger(QString query,bool caseSensitive,bool wholeWords){//slot function of find pushButton in findDialog
     static_cast<Editor*>(tab->currentWidget())->find(query,caseSensitive,wholeWords);
+}
+
+void MainWindow::on_startReplaceTrigger(QString what,QString with,bool caseSensitive,bool wholeWords){
+    static_cast<Editor*>(tab->currentWidget())->replace(what,with,caseSensitive,wholeWords);
 }

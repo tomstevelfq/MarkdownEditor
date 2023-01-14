@@ -171,7 +171,7 @@ void Editor::toggleUndo(bool available){
     wid->toggle_undo(available);
 }
 
-void Editor::find(QString query,bool caseSensitive,bool wholeWords){
+bool Editor::find(QString query,bool caseSensitive,bool wholeWords){
     int curCursorPosition=textCursor().position();
     QTextDocument::FindFlags searchOptions=getSearchOptions(caseSensitive,wholeWords);
     bool matchFound=QPlainTextEdit::find(query,searchOptions);
@@ -183,14 +183,39 @@ void Editor::find(QString query,bool caseSensitive,bool wholeWords){
         moveCursorTo(curCursorPosition);
         static_cast<FindDialog*>(objMap["findDialog"])->on_findRequestReady("no results found");
     }
+    return matchFound;
 }
 
-void Editor::replace(QString what,QString with,bool caseSensitive,bool wholeWords){
-
+bool Editor::replace(QString what,QString with,bool caseSensitive,bool wholeWords){
+    bool found=find(what,caseSensitive,wholeWords);
+    if(found){
+        QTextCursor cursor=textCursor();
+        cursor.beginEditBlock();
+        cursor.insertText(with);
+        cursor.endEditBlock();
+    }
+    return found;
 }
 
 void Editor::replaceAll(QString what,QString with,bool caseSensitive,bool wholeWords){
-
+    moveCursorTo(0);
+    QTextDocument::FindFlags searchOptions=getSearchOptions(caseSensitive,wholeWords);
+    bool found=QPlainTextEdit::find(what,searchOptions);
+    int replacements=0;
+    QTextCursor cursor(document());
+    cursor.beginEditBlock();
+    while(found){
+        QTextCursor curPos=textCursor();
+        curPos.insertText(with);
+        replacements++;
+        found=QPlainTextEdit::find(what,searchOptions);
+    }
+    cursor.endEditBlock();
+    if(replacements==0){
+        static_cast<FindDialog*>(objMap["findDialog"])->on_findRequestReady("no results found");
+    }else{
+        static_cast<FindDialog*>(objMap["findDialog"])->on_findRequestReady("document searched, replaced "+QString::number(replacements)+" instances");
+    }
 }
 
 void Editor::moveCursorTo(int position){
