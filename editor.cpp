@@ -12,6 +12,7 @@
 #include"mainwindow.h"
 #include"utils.h"
 #include"finddialog.h"
+#include"searchhistory.h"
 
 Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -26,6 +27,7 @@ Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     connect(this,&Editor::blockCountChanged,this,&Editor::updateLineNumberWidth);
     connect(this,&Editor::redoAvailable,this,&Editor::toggleRedo);
     connect(this,&Editor::undoAvailable,this,&Editor::toggleUndo);
+    connect(this,&Editor::textChanged,this,&Editor::on_textChange);
     this->setStyleSheet("color:darkMagenta");
 
     updateLineNumberWidth();
@@ -179,7 +181,22 @@ bool Editor::find(QString query,bool caseSensitive,bool wholeWords){
         moveCursor(QTextCursor::Start);
         matchFound=QPlainTextEdit::find(query,searchOptions);
     }
-    if(!matchFound){
+    if(matchFound){
+        int foundPosition=textCursor().position();
+        bool previousFound=searchHistory.previousFound(query);
+        if(!previousFound){
+            searchHistory.add(query,curCursorPosition,foundPosition);
+        }else{
+            bool loopBackMatch=foundPosition==searchHistory.firstFoundAt(query);
+            if(loopBackMatch){
+                matchFound=false;
+                int cursorPosBeforeSearch=searchHistory.curPosBeforeFirstSearchFor(query);
+                moveCursorTo(cursorPosBeforeSearch);
+                searchHistory.clear();
+                static_cast<FindDialog*>(objMap["findDialog"])->on_findRequestReady("no more results found");
+            }
+        }
+    }else{
         moveCursorTo(curCursorPosition);
         static_cast<FindDialog*>(objMap["findDialog"])->on_findRequestReady("no results found");
     }
@@ -233,4 +250,9 @@ QTextDocument::FindFlags Editor::getSearchOptions(bool caseSensitive,bool wholeW
         searchOptions |=QTextDocument::FindWholeWords;
     }
     return searchOptions;
+}
+
+void Editor::on_textChange(){
+    searchHistory.clear();
+    static_cast<MainWindow*>(objMap["MainWindow"])->on_textChanged(this);
 }

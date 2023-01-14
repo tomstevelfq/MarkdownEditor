@@ -36,6 +36,7 @@ HEADERS += \
     editor.h \
     finddialog.h \
     mainwindow.h \
+    searchhistory.h \
     tabeditor.h \
     linenumberarea.h \
     utils.h

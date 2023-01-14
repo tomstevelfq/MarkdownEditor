@@ -133,6 +133,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pFind,&QAction::triggered,this,&MainWindow::on_findTrigger);
     connect(findDialog,&FindDialog::start_find,this,&MainWindow::on_startFindTrigger);
     connect(findDialog,&FindDialog::start_replace,this,&MainWindow::on_startReplaceTrigger);
+    connect(findDialog,&FindDialog::start_replaceAll,this,&MainWindow::on_startReplaceAllTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -150,7 +151,6 @@ MainWindow::MainWindow(QWidget *parent) :
     statusBar=new QStatusBar(this);
     this->setStatusBar(statusBar);
     initStatusBar();
-    connect(tab,&tabEditor::textChanged,this,&MainWindow::on_textChanged);
     on_textChanged(static_cast<Editor*>(tab->currentWidget()));
     initLangMap();
 }
@@ -283,4 +283,8 @@ void MainWindow::on_startFindTrigger(QString query,bool caseSensitive,bool whole
 
 void MainWindow::on_startReplaceTrigger(QString what,QString with,bool caseSensitive,bool wholeWords){
     static_cast<Editor*>(tab->currentWidget())->replace(what,with,caseSensitive,wholeWords);
+}
+
+void MainWindow::on_startReplaceAllTrigger(QString what,QString with,bool caseSensitive,bool wholeWords){
+    static_cast<Editor*>(tab->currentWidget())->replaceAll(what,with,caseSensitive,wholeWords);
 }

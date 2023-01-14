@@ -3,6 +3,7 @@
 #include<QPlainTextEdit>
 #include<QFile>
 #include<QTextCodec>
+#include"searchhistory.h"
 class LineNumberArea;
 class Editor:public QPlainTextEdit{
     Q_OBJECT
@@ -36,6 +37,7 @@ private:
     QTextDocument::FindFlags getSearchOptions(bool,bool);
     LineNumberArea *lineNumber;
     int lineNumberPadding=25;
+    SearchHistory searchHistory;
     QFont font;
 
 protected:
@@ -47,6 +49,7 @@ public slots:
     void updateLineNumberArea(const QRect&,int);
     void toggleRedo(bool);
     void toggleUndo(bool);
+    void on_textChange();
 signals:
     void columnChanged(int);
     void tabNameChange(int,QString);

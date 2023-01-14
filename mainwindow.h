@@ -46,11 +46,12 @@ private:
     QAction *pCut;
     QAction *pCopy;
     FindDialog* findDialog;
+public slots:
+    void on_textChanged(Editor*);
 private slots:
     void newFile();
     void open();
     void fontChoose();
-    void on_textChanged(Editor*);
     void on_statusBarTrigger();
     void on_langSelected(QAction*);
     void on_indentTrigger();
@@ -63,6 +64,7 @@ private slots:
     void on_findTrigger();
     void on_startFindTrigger(QString,bool,bool);
     void on_startReplaceTrigger(QString,QString,bool,bool);
+    void on_startReplaceAllTrigger(QString,QString,bool,bool);
 //    void save();
 //    void saveAs();
 //    void print();
