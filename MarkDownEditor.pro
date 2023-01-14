@@ -47,3 +47,6 @@ RESOURCES += \
     resources.qrc \
     resources.qrc
 
+DISTFILES += \
+    README.md
+
