@@ -60,7 +60,8 @@ private slots:
     void on_copyTrigger();
     void on_cutTrigger();
     void on_pasteTrigger();
-    void on_findTrigger(/*QString,bool,bool*/);
+    void on_findTrigger();
+    void on_startFindTrigger(QString,bool,bool);
 //    void save();
 //    void saveAs();
 //    void print();

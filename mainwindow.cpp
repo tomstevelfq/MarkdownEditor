@@ -131,7 +131,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pCut,&QAction::triggered,this,&MainWindow::on_cutTrigger);
     connect(pPaste,&QAction::triggered,this,&MainWindow::on_pasteTrigger);
     connect(pFind,&QAction::triggered,this,&MainWindow::on_findTrigger);
-    //connect(findDialog,&FindDialog::start_find,this,&MainWindow::on_findTrigger);
+    connect(findDialog,&FindDialog::start_find,this,&MainWindow::on_startFindTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -267,12 +267,15 @@ void MainWindow::on_pasteTrigger(){
     static_cast<Editor*>(tab->currentWidget())->paste();
 }
 
-void MainWindow::on_findTrigger(/*QString query,bool caseSensitive,bool wholeWords*/){
-    //static_cast<Editor*>(tab->currentWidget())->find(query,caseSensitive,wholeWords);
+void MainWindow::on_findTrigger(){//slot function of menubar
     if(findDialog->isHidden()){
         findDialog->show();
         findDialog->activateWindow();
         findDialog->raise();
         findDialog->setFocus();
     }
+}
+
+void MainWindow::on_startFindTrigger(QString query,bool caseSensitive,bool wholeWords){//slot function of find pushButton in findDialog
+    static_cast<Editor*>(tab->currentWidget())->find(query,caseSensitive,wholeWords);
 }
