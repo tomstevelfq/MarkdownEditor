@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     editor.cpp \
+    finddialog.cpp \
     main.cpp \
     mainwindow.cpp \
     tabeditor.cpp \
@@ -33,9 +34,9 @@ SOURCES += \
 
 HEADERS += \
     editor.h \
+    finddialog.h \
     mainwindow.h \
     tabeditor.h \
-    ui_mainwindow.h \
     linenumberarea.h \
     utils.h
 
@@ -43,5 +44,6 @@ FORMS += \
         mainwindow.ui
 
 RESOURCES += \
+    resources.qrc \
     resources.qrc
 

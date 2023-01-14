@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    QApplication::setStyle("fusion");
     objMap["MainWindow"]=&w;
     w.show();
 

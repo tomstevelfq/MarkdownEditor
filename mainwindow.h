@@ -5,6 +5,7 @@
 #include "editor.h"
 #include"tabeditor.h"
 #include<QLabel>
+#include"finddialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -44,6 +45,7 @@ private:
     QAction *pRedo;
     QAction *pCut;
     QAction *pCopy;
+    FindDialog* findDialog;
 private slots:
     void newFile();
     void open();
@@ -58,6 +60,7 @@ private slots:
     void on_copyTrigger();
     void on_cutTrigger();
     void on_pasteTrigger();
+    void on_findTrigger(/*QString,bool,bool*/);
 //    void save();
 //    void saveAs();
 //    void print();

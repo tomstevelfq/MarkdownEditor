@@ -11,6 +11,7 @@
 #include<QFontDialog>
 #include"mainwindow.h"
 #include"utils.h"
+#include"finddialog.h"
 
 Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     setLineWrapMode(QPlainTextEdit::LineWrapMode::NoWrap);
@@ -168,4 +169,43 @@ void Editor::toggleRedo(bool available){
 void Editor::toggleUndo(bool available){
     MainWindow *wid=static_cast<MainWindow*>(objMap["MainWindow"]);
     wid->toggle_undo(available);
+}
+
+void Editor::find(QString query,bool caseSensitive,bool wholeWords){
+    int curCursorPosition=textCursor().position();
+    QTextDocument::FindFlags searchOptions=getSearchOptions(caseSensitive,wholeWords);
+    bool matchFound=QPlainTextEdit::find(query,searchOptions);
+    if(!matchFound){
+        moveCursor(QTextCursor::Start);
+        matchFound=QPlainTextEdit::find(query,searchOptions);
+    }
+    if(!matchFound){
+        moveCursorTo(curCursorPosition);
+        static_cast<FindDialog*>(objMap["findDialog"])->on_findRequestReady("no results found");
+    }
+}
+
+void Editor::replace(QString what,QString with,bool caseSensitive,bool wholeWords){
+
+}
+
+void Editor::replaceAll(QString what,QString with,bool caseSensitive,bool wholeWords){
+
+}
+
+void Editor::moveCursorTo(int position){
+    QTextCursor newCursor=textCursor();
+    newCursor.setPosition(position);
+    setTextCursor(newCursor);
+}
+
+QTextDocument::FindFlags Editor::getSearchOptions(bool caseSensitive,bool wholeWords){
+    QTextDocument::FindFlags searchOptions=QTextDocument::FindFlags();
+    if(caseSensitive){
+        searchOptions |=QTextDocument::FindCaseSensitively;
+    }
+    if(wholeWords){
+        searchOptions |=QTextDocument::FindWholeWords;
+    }
+    return searchOptions;
 }

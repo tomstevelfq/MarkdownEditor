@@ -10,6 +10,8 @@
 #include<QMessageBox>
 #include<QTextCodec>
 #include<QComboBox>
+#include"finddialog.h"
+#include"utils.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QAction* pPrint=pFile->addAction("打印");
     QAction* pExit=pFile->addAction("退出");
     pUndo=pEdit->addAction("撤销");
+    pUndo->setEnabled(false);
     pRedo=pEdit->addAction("重做");
     pRedo->setEnabled(false);
     pCut=pEdit->addAction("剪切");
@@ -63,32 +66,36 @@ MainWindow::MainWindow(QWidget *parent) :
     pStatus->setChecked(true);
     pWrap->setChecked(false);
 
+    findDialog=new FindDialog();
+    findDialog->setParent(this,Qt::Tool|Qt::MSWindowsFixedSizeDialogHint);
+    objMap["findDialog"]=findDialog;
+
     QToolBar* toolBar=new QToolBar("toolBar",this);
     addToolBar(toolBar);
 
-    QIcon icon1(":/files/icons/新建.svg");
+    QIcon icon1(":/files/icons/new.svg");
     pNew->setIcon(icon1);
-    QIcon icon2(":/files/icons/文件夹.svg");
+    QIcon icon2(":/files/icons/folder.svg");
     pOpen->setIcon(icon2);
-    QIcon icon3(":/files/icons/保存.svg");
+    QIcon icon3(":/files/icons/save.svg");
     pSave->setIcon(icon3);
-    QIcon icon4(":/files/icons/另存为.svg");
+    QIcon icon4(":/files/icons/saveas.svg");
     pSaveAs->setIcon(icon4);
-    QIcon icon5(":/files/icons/打印.svg");
+    QIcon icon5(":/files/icons/print.svg");
     pPrint->setIcon(icon5);
-    QIcon icon6(":/files/icons/退出.svg");
+    QIcon icon6(":/files/icons/exit.svg");
     pExit->setIcon(icon6);
-    QIcon icon7(":/files/icons/撤销.svg");
+    QIcon icon7(":/files/icons/undo.svg");
     pUndo->setIcon(icon7);
-    QIcon icon8(":/files/icons/重做.png");
+    QIcon icon8(":/files/icons/redo.png");
     pRedo->setIcon(icon8);
-    QIcon icon9(":/files/icons/剪切.svg");
+    QIcon icon9(":/files/icons/cut.svg");
     pCut->setIcon(icon9);
-    QIcon icon10(":/files/icons/复制.svg");
+    QIcon icon10(":/files/icons/copy.svg");
     pCopy->setIcon(icon10);
-    QIcon icon11(":/files/icons/粘贴.svg");
+    QIcon icon11(":/files/icons/paste.svg");
     pPaste->setIcon(icon11);
-    QIcon icon12(":/files/icons/搜索.svg");
+    QIcon icon12(":/files/icons/search.svg");
     pFind->setIcon(icon12);
     //QIcon icon13(":/files/icons/替换.svg");
     //pReplace->setIcon(icon13);
@@ -123,6 +130,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pCopy,&QAction::triggered,this,&MainWindow::on_copyTrigger);
     connect(pCut,&QAction::triggered,this,&MainWindow::on_cutTrigger);
     connect(pPaste,&QAction::triggered,this,&MainWindow::on_pasteTrigger);
+    connect(pFind,&QAction::triggered,this,&MainWindow::on_findTrigger);
+    //connect(findDialog,&FindDialog::start_find,this,&MainWindow::on_findTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
@@ -256,4 +265,14 @@ void MainWindow::on_copyTrigger(){
 
 void MainWindow::on_pasteTrigger(){
     static_cast<Editor*>(tab->currentWidget())->paste();
+}
+
+void MainWindow::on_findTrigger(/*QString query,bool caseSensitive,bool wholeWords*/){
+    //static_cast<Editor*>(tab->currentWidget())->find(query,caseSensitive,wholeWords);
+    if(findDialog->isHidden()){
+        findDialog->show();
+        findDialog->activateWindow();
+        findDialog->raise();
+        findDialog->setFocus();
+    }
 }

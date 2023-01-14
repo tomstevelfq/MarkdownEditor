@@ -26,9 +26,14 @@ public:
     void langChanged(QString);
     QString getLang();
     QString language;
+    void find(QString,bool,bool);
+    void replace(QString,QString,bool,bool);
+    void replaceAll(QString,QString,bool,bool);
 private:
     void highlightCurrentLine();
     int getLineNumberWidth();
+    void moveCursorTo(int position);
+    QTextDocument::FindFlags getSearchOptions(bool,bool);
     LineNumberArea *lineNumber;
     int lineNumberPadding=25;
     QFont font;
