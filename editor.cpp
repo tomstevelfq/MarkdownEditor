@@ -28,7 +28,7 @@ Editor::Editor(QWidget *parent):QPlainTextEdit(parent){
     connect(this,&Editor::redoAvailable,this,&Editor::toggleRedo);
     connect(this,&Editor::undoAvailable,this,&Editor::toggleUndo);
     connect(this,&Editor::textChanged,this,&Editor::on_textChange);
-    this->setStyleSheet("color:darkMagenta");
+    //this->setStyleSheet("color:darkMagenta");
 
     updateLineNumberWidth();
     on_cursorPositionChanged();
@@ -72,7 +72,7 @@ void Editor::on_cursorPositionChanged(){
     highlightCurrentLine();
     QTextStream qout(stdout);
     currentColumn=textCursor().positionInBlock();
-    qout<<toPlainText()<<endl;
+    //qout<<toPlainText()<<endl;
 }
 
 QString Editor::getName(){
@@ -156,7 +156,11 @@ void Editor::loadFont(QString family,QFont::StyleHint styleHint,bool fixedPitch,
 }
 
 void Editor::langChanged(QString lang){
+    if(language==lang){
+        return;
+    }
     language=lang;
+    syntaxHighLighter=genHighlighterFor(lang);
 }
 
 QString Editor::getLang(){
@@ -255,4 +259,22 @@ QTextDocument::FindFlags Editor::getSearchOptions(bool caseSensitive,bool wholeW
 void Editor::on_textChange(){
     searchHistory.clear();
     static_cast<MainWindow*>(objMap["MainWindow"])->on_textChanged(this);
+}
+
+HighLighter *Editor::genHighlighterFor(QString lang){
+    QTextDocument *doc=document();
+    if(lang=="c"){
+        return cHighlighter(doc);
+    }else if(lang=="cpp"){
+        return cppHighlighter(doc);
+    }else if(lang=="java"){
+        return javaHighlighter(doc);
+    }else if(lang=="python"){
+        return pythonHighlighter(doc);
+    }else if(lang=="markdown"){
+        return markdownHighlighter(doc);
+    }else if(lang=="test"){
+        return testLighter(doc);
+    }
+    return nullptr;
 }

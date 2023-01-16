@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     editor.cpp \
     finddialog.cpp \
+    highlighter.cpp \
     main.cpp \
     mainwindow.cpp \
     tabeditor.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
 HEADERS += \
     editor.h \
     finddialog.h \
+    highlighter.h \
     mainwindow.h \
     searchhistory.h \
     tabeditor.h \

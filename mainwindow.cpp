@@ -48,6 +48,9 @@ MainWindow::MainWindow(QWidget *parent) :
     pLangPython=menuLanguage->addAction("python");
     pLangCpp=menuLanguage->addAction("cpp");
     pLangJava=menuLanguage->addAction("java");
+    pLangC=menuLanguage->addAction("c");
+    pLangMarkdown=menuLanguage->addAction("markdown");
+    pLangTest=menuLanguage->addAction("test");
     pLangPython->setCheckable(true);
     pLangCpp->setCheckable(true);
     pLangJava->setCheckable(true);
@@ -57,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent) :
     langGroup->addAction(pLangPython);
     langGroup->addAction(pLangCpp);
     langGroup->addAction(pLangJava);
+    langGroup->addAction(pLangC);
+    langGroup->addAction(pLangMarkdown);
+    langGroup->addAction(pLangTest);
     connect(langGroup,&QActionGroup::triggered,this,&MainWindow::on_langSelected);
     pStatus=pView->addAction("状态栏");
     pIndent->setCheckable(true);
@@ -192,6 +198,9 @@ void MainWindow::initLangMap(){
     langMap[pLangPython]="python";
     langMap[pLangCpp]="cpp";
     langMap[pLangJava]="java";
+    langMap[pLangC]="c";
+    langMap[pLangMarkdown]="markdown";
+    langMap[pLangTest]="test";
 }
 
 void MainWindow::on_textChanged(Editor *editor){

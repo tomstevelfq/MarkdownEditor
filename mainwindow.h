@@ -39,12 +39,15 @@ private:
     QAction *pLangPython;
     QAction *pLangCpp;
     QAction *pLangJava;
+    QAction *pLangC;
     QAction* pIndent;
     QAction* pWrap;
     QAction *pUndo;
     QAction *pRedo;
     QAction *pCut;
     QAction *pCopy;
+    QAction *pLangMarkdown;
+    QAction* pLangTest;
     FindDialog* findDialog;
 public slots:
     void on_textChanged(Editor*);

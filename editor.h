@@ -4,6 +4,7 @@
 #include<QFile>
 #include<QTextCodec>
 #include"searchhistory.h"
+#include"highlighter.h"
 class LineNumberArea;
 class Editor:public QPlainTextEdit{
     Q_OBJECT
@@ -39,6 +40,8 @@ private:
     int lineNumberPadding=25;
     SearchHistory searchHistory;
     QFont font;
+    HighLighter *genHighlighterFor(QString language);
+    HighLighter *syntaxHighLighter;
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
