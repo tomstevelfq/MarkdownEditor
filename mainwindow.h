@@ -48,6 +48,7 @@ private:
     QAction *pCopy;
     QAction *pLangMarkdown;
     QAction* pLangTest;
+    QAction* pMarkdown;
     FindDialog* findDialog;
 public slots:
     void on_textChanged(Editor*);

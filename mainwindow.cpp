@@ -103,9 +103,10 @@ MainWindow::MainWindow(QWidget *parent) :
     pPaste->setIcon(icon11);
     QIcon icon12(":/files/icons/search.svg");
     pFind->setIcon(icon12);
-    //QIcon icon13(":/files/icons/替换.svg");
-    //pReplace->setIcon(icon13);
+    QIcon icon13(":/files/icons/markdown.svg");
 
+    pMarkdown= new QAction(this);
+    pMarkdown->setIcon(icon13);
 
     toolBar->setFloatable(false);
     toolBar->setMovable(false);
@@ -114,7 +115,8 @@ MainWindow::MainWindow(QWidget *parent) :
     toolBar->addAction(pSave);
     toolBar->addAction(pSaveAs);
     toolBar->addSeparator();
-    toolBar->addAction(pPrint);
+    toolBar->addAction(pMarkdown);
+    //toolBar->addAction(pPrint);
     toolBar->addAction(pExit);
     toolBar->layout()->setContentsMargins(15,15,20,20);
     toolBar->layout()->setSpacing(20);

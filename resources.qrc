@@ -17,5 +17,6 @@
         <file>icons/search.svg</file>
         <file>icons/tips.svg</file>
         <file>icons/undo.svg</file>
+        <file>icons/markdown.svg</file>
     </qresource>
 </RCC>
