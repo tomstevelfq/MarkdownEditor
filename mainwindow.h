@@ -7,6 +7,7 @@
 #include<QLabel>
 #include"finddialog.h"
 
+class MarkdownEditor;
 namespace Ui {
 class MainWindow;
 }
@@ -50,6 +51,8 @@ private:
     QAction* pLangTest;
     QAction* pMarkdown;
     FindDialog* findDialog;
+    MarkdownEditor* meditor;
+    bool MarkdownDispalyState=false;
 public slots:
     void on_textChanged(Editor*);
 private slots:
@@ -69,6 +72,7 @@ private slots:
     void on_startFindTrigger(QString,bool,bool);
     void on_startReplaceTrigger(QString,QString,bool,bool);
     void on_startReplaceAllTrigger(QString,QString,bool,bool);
+    void on_markdownTrigger();
 //    void save();
 //    void saveAs();
 //    void print();

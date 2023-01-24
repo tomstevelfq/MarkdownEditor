@@ -74,6 +74,71 @@ void HighLighter::setBlockCommentFormat()
     blockCommentFormat.setForeground(Qt::darkGreen);
 }
 
+void HighLighter::setDividePattern(QRegularExpression dividePattern){
+    setDivideFormat();
+    addRule(dividePattern,divideFormat);
+}
+
+void HighLighter::setDivideFormat(){
+    divideFormat.setForeground(Qt::darkYellow);
+    divideFormat.setFontItalic(true);
+}
+
+void HighLighter::setUnderlinePattern(QRegularExpression underlinePattern){
+    setUnderlineFormat();
+    addRule(underlinePattern,underlineFormat);
+}
+
+void HighLighter::setUnderlineFormat(){
+    underlineFormat.setForeground(Qt::darkGray);
+}
+
+void HighLighter::setDeletePattern(QRegularExpression deletePattern){
+    setDeleteFormat();
+    addRule(deletePattern,deleteFormat);
+}
+
+void HighLighter::setDeleteFormat(){
+    deleteFormat.setForeground(Qt::red);
+}
+
+void HighLighter::setFootnotePattern(QRegularExpression footnotePattern){
+    setFootnoteFormat();
+    addRule(footnotePattern,footnoteFormat);
+}
+
+void HighLighter::setFootnoteFormat(){
+    footnoteFormat.setBackground(Qt::gray);
+    footnoteFormat.setForeground(Qt::darkGreen);
+}
+
+void HighLighter::setBlockPattern(QRegularExpression blockPattern){
+    setBlockFormat();
+    addRule(blockPattern,blockFormat);
+}
+
+void HighLighter::setBlockFormat(){
+    blockFormat.setForeground(Qt::red);
+}
+
+void HighLighter::setLinkPattern(QRegularExpression linkPattern){
+    setLinkFormat();
+    addRule(linkPattern,linkFormat);
+}
+
+void HighLighter::setLinkFormat(){
+    linkFormat.setForeground(Qt::red);
+}
+
+void HighLighter::setCodePattern(QRegularExpression codePattern){
+    setCodeFormat();
+    addRule(codePattern,codeFormat);
+}
+
+void HighLighter::setCodeFormat(){
+    codeFormat.setForeground(Qt::blue);
+    codeFormat.setBackground(Qt::gray);
+}
 
 void HighLighter::addRule(QRegularExpression pattern, QTextCharFormat format)
 {
@@ -241,7 +306,31 @@ HighLighter *pythonHighlighter(QTextDocument *doc)
 }
 
 HighLighter *markdownHighlighter(QTextDocument *doc){
-    return nullptr;
+    QStringList keywords;
+    //markdown中的关键字
+    keywords << "^#*"<<"^\\*.*\\*"<<"^\\*\\*.*\\*\\*"<<"^\\*\\*\\*.*\\*\\*\\*"<<"^\\*";
+    QRegularExpression blockCommentStart("/\\*");
+    QRegularExpression blockCommentEnd("\\*/");
+    QRegularExpression divide("\\*\\*\\*");
+    QRegularExpression deleteReg("\\~\\~.*\\~\\~");
+    QRegularExpression underline("\\<u\\>.*\\<\\\\u\\>");
+    QRegularExpression footnote("\\[\\^.*\\]");
+    QRegularExpression block("^\\>*");
+    QRegularExpression code("```.*```");
+    QRegularExpression link("\\[.*\\]");
+
+    HighLighter *highlighter=new HighLighter(doc);
+    highlighter->addKeywords(keywords);
+    highlighter->setBlockCommentStartPattern(blockCommentStart);
+    highlighter->setBlockCommentEndPattern(blockCommentEnd);
+    highlighter->setDividePattern(divide);
+    highlighter->setDeletePattern(deleteReg);
+    highlighter->setUnderlinePattern(underline);
+    highlighter->setFootnotePattern(footnote);
+    highlighter->setBlockPattern(block);
+    highlighter->setCodePattern(code);
+    highlighter->setLinkPattern(link);
+    return highlighter;
 }
 
 HighLighter *testLighter(QTextDocument *doc){

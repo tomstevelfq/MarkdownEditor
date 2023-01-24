@@ -38,6 +38,9 @@ HEADERS += \
     finddialog.h \
     highlighter.h \
     mainwindow.h \
+    markdowneditor.h \
+    markdownrender.h \
+    markdownviewer.h \
     searchhistory.h \
     tabeditor.h \
     linenumberarea.h \

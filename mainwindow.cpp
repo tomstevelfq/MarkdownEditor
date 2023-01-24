@@ -12,6 +12,7 @@
 #include<QComboBox>
 #include"finddialog.h"
 #include"utils.h"
+#include"markdowneditor.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -142,12 +143,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(findDialog,&FindDialog::start_find,this,&MainWindow::on_startFindTrigger);
     connect(findDialog,&FindDialog::start_replace,this,&MainWindow::on_startReplaceTrigger);
     connect(findDialog,&FindDialog::start_replaceAll,this,&MainWindow::on_startReplaceAllTrigger);
+    connect(pMarkdown,&QAction::triggered,this,&MainWindow::on_markdownTrigger);
 
     QWidget *centerWidget=centralWidget();
     QVBoxLayout *verticalLayout=new QVBoxLayout(centerWidget);
     tab=new tabEditor();
     Editor* editor=new Editor();
     verticalLayout->addWidget(tab);
+    meditor=new MarkdownEditor(this);
+    verticalLayout->addLayout(meditor);
+    meditor->setVisible(false);
+
     connect(combox,static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatChange);
     connect(combox,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),tab,&tabEditor::code_formatIndexChange);
     connect(tab,&tabEditor::tabChanged,combox,&QComboBox::setCurrentIndex);
@@ -298,4 +304,15 @@ void MainWindow::on_startReplaceTrigger(QString what,QString with,bool caseSensi
 
 void MainWindow::on_startReplaceAllTrigger(QString what,QString with,bool caseSensitive,bool wholeWords){
     static_cast<Editor*>(tab->currentWidget())->replaceAll(what,with,caseSensitive,wholeWords);
+}
+
+void MainWindow::on_markdownTrigger(){
+    MarkdownDispalyState=!MarkdownDispalyState;
+    tab->setHidden(MarkdownDispalyState);
+    meditor->setVisible(MarkdownDispalyState);
+    if(MarkdownDispalyState){
+        languageLabel->setText("Markdown");
+    }else{
+        languageLabel->setText("语言：未选择");
+    }
 }
