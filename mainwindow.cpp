@@ -151,6 +151,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Editor* editor=new Editor();
     verticalLayout->addWidget(tab);
     meditor=new MarkdownEditor(this);
+    objMap["markdowneditor"]=meditor;
     verticalLayout->addLayout(meditor);
     meditor->setVisible(false);
 

@@ -258,6 +258,13 @@ QTextDocument::FindFlags Editor::getSearchOptions(bool caseSensitive,bool wholeW
 
 void Editor::on_textChange(){
     searchHistory.clear();
+    MainWindow* wind=static_cast<MainWindow*>(objMap["MainWindow"]);
+    if(wind->MarkdownDispalyState){
+        QTextCursor tc=this->textCursor();
+        int linenum=tc.blockNumber();
+        string str=this->document()->findBlockByNumber(linenum).text().toStdString();
+        emit textedit(linenum,str);
+    }
     static_cast<MainWindow*>(objMap["MainWindow"])->on_textChanged(this);
 }
 

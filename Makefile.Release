@@ -1712,24 +1712,18 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QCheckBox \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qcheckbox.h \
 		ui_mainwindow.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QVariant \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QAction \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QToolBar \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qtoolbar.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qaction.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qactiongroup.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QApplication \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qapplication.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qcoreapplication.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qeventloop.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qguiapplication.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qinputmethod.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QButtonGroup \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QHeaderView \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qheaderview.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QFileDialog \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qfiledialog.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qdir.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qfileinfo.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QTextStream \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QVBoxLayout \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QComboBox \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qcombobox.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qstyleoption.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qabstractspinbox.h \
@@ -1739,26 +1733,15 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qstyle.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qtabbar.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QMenuBar \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qmenubar.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qmenu.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QStatusBar \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qstatusbar.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QWidget \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QToolBar \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qtoolbar.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QFileDialog \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qfiledialog.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qdir.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qfileinfo.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QTextStream \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QVBoxLayout \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QComboBox \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qcombobox.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/qabstractitemmodel.h \
 		utils.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QObject \
 		markdowneditor.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QHBoxLayout
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QWidget \
+		markdownviewer.h \
+		markdownrender.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o mainwindow.cpp
 
 release/tabeditor.o: tabeditor.cpp tabeditor.h \

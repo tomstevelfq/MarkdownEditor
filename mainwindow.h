@@ -26,6 +26,7 @@ public:
     QLabel* wordLabel;
     QLabel* charLabel;
     QAction *pStatus;
+    bool MarkdownDispalyState=false;
     void toggle_undo(bool);
     void toggle_redo(bool);
     void toggle_copyCut(bool);
@@ -52,7 +53,6 @@ private:
     QAction* pMarkdown;
     FindDialog* findDialog;
     MarkdownEditor* meditor;
-    bool MarkdownDispalyState=false;
 public slots:
     void on_textChanged(Editor*);
 private slots:

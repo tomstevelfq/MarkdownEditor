@@ -5,6 +5,8 @@
 #include<QTextCodec>
 #include"searchhistory.h"
 #include"highlighter.h"
+#include<string>
+using namespace std;
 class LineNumberArea;
 class Editor:public QPlainTextEdit{
     Q_OBJECT
@@ -42,7 +44,6 @@ private:
     QFont font;
     HighLighter *genHighlighterFor(QString language);
     HighLighter *syntaxHighLighter;
-
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
@@ -56,6 +57,7 @@ public slots:
 signals:
     void columnChanged(int);
     void tabNameChange(int,QString);
+    void textedit(int linenum,const string& str);
 };
 
 #endif // EDITOR_H
