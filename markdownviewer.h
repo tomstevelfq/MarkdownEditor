@@ -17,7 +17,7 @@ public:
         layout=new QVBoxLayout(wid);
         scrollArea=new QScrollArea();
         wid->setMinimumHeight(scrollArea->height());
-        wid->setStyleSheet("background-color:blue");
+        //wid->setStyleSheet("background-color:#7FFF00");
         scrollArea->setWidget(wid);
         mainLayout->addWidget(scrollArea);
         mainLayout->addStretch();

@@ -8,8 +8,9 @@
 #include"markdownviewer.h"
 #include<QVariant>
 #include<QFontMetrics>
+#include"editor.h"
 using namespace std;
-enum Type{TITLE,LINK,PARA};
+enum Type{TITLE,LINK,PARA,BLOCK};
 class Markdown{
 public:
     int level=0;
@@ -73,18 +74,24 @@ public:
     int parser(){
         gettoken('[');
         int sta=pos;
-        while(pstr[pos]!=']'){
+        while(pos<pstr.size()&&pstr[pos]!=']'){
             pos++;
         }
         name=pstr.substr(sta,pos-sta);
-        gettoken(']');
-        gettoken('(');
+        if(!gettoken(']')||name.size()==0){
+            return -1;
+        }
+        if(!gettoken('(')){
+            return -1;
+        }
         sta=pos;
-        while(pstr[pos]!=')'){
+        while(pos<pstr.size()&&pstr[pos]!=')'){
             pos++;
         }
         linkstr=pstr.substr(sta,pos-sta);
-        gettoken(')');
+        if(!gettoken(')')){
+            return -1;
+        }
         return 0;
     }
 };
@@ -99,6 +106,23 @@ public:
             pstr.pop_back();
         }
         content=pstr;
+        return 0;
+    }
+};
+
+class Block:public Markdown{
+public:
+    vector<string> contents;
+    Block(string str):Markdown(str){
+        type=BLOCK;
+    }
+    void setContents(const vector<string>& v){
+        contents=v;
+    }
+    void setContent(const string& str){
+        content=str;
+    }
+    int parser(){
         return 0;
     }
 };
@@ -137,12 +161,26 @@ public:
             }
             return wid;
         }else if(md->type==LINK){
-            static_cast<QLabel*>(wid)->setText(QString::fromStdString(md->content));
-            wid->setProperty("heightadd",35);
+            static_cast<QLabel*>(wid)->setText(QString::fromStdString(static_cast<Link*>(md)->name));
+            wid->setProperty("heightadd",35*1.5);
+            wid->setStyleSheet("text-decoration:underline;color:#1E90FF;");
             return wid;
         }else if(md->type==PARA){
             static_cast<QLabel*>(wid)->setText(QString::fromStdString(md->content));
-            wid->setProperty("heightadd",35);
+            QFont font;
+            font.setPixelSize(30);
+            wid->setFont(font);
+            QFontMetrics fm(font);
+            wid->setProperty("heightadd",fm.height()*1.5);
+            return wid;
+        }else if(md->type==BLOCK){
+            static_cast<QLabel*>(wid)->setText(QString::fromStdString(md->content));
+            QFont font;
+            font.setPixelSize(30);
+            wid->setFont(font);
+            QFontMetrics fm(font);
+            static_cast<QLabel*>(wid)->setStyleSheet("border:5px solid gray;border-width:0 0 0 5px;");
+            wid->setProperty("heightadd",fm.height()*2);
             return wid;
         }
     }
@@ -153,6 +191,7 @@ public:
     int pos=0;
     int lines=0;
     int height=0;
+    Editor* editor;
     //MarkdownRoot* root;
     MarkdownViewer* viewer;
     vector<pair<int,Markdown*>> documents;
@@ -161,26 +200,22 @@ public:
     }
 
     void insert(int linenum,const string& str){
-        cout<<linenum<<"  "<<viewer->count()-1<<endl;
-        if(linenum<viewer->count()-1){
+        cout<<linenum<<"  "<<viewer->count()<<endl;
+        if(linenum<viewer->count()){
             QWidget* wid=viewer->getWidget(linenum);
-            process(str,wid);
+            process(str,wid,linenum);
             viewer->wid->adjustSize();
         }else{
             QLabel* wid=new QLabel();
-            if(process(str,wid)){
+            if(process(str,wid,linenum)){
                 QVBoxLayout* lout=viewer->layout;
-                QLayoutItem* item=lout->itemAt(lout->count()-1);
-                lout->removeItem(item);//删除弹簧
-                lout->addWidget(wid);
-                cout<<static_cast<QLabel*>(wid)->height()<<endl;
-
-                lout->addStretch();//重新添加弹簧
+                lout->insertWidget(lout->count(),wid);
                 cout<<wid->property("heightadd").toInt()<<endl;
                 height+=wid->property("heightadd").toInt();
                 cout<<wid->height()<<endl;
-                viewer->wid->setMinimumHeight(height);
-                viewer->wid->setMaximumHeight(height);
+                viewer->wid->setMinimumHeight(max(height,100));
+                viewer->wid->setMaximumHeight(max(height,100));
+                viewer->wid->setMinimumWidth(200);
                 viewer->wid->adjustSize();
             }
         }
@@ -188,7 +223,8 @@ public:
     void updateHeight(int height){
         viewer->reshape(height);
     }
-    bool process(const string& str,QWidget* wid){
+
+    bool process(const string& str,QWidget* wid,int linenum){
         wid->setProperty("line",1);
         wid->setProperty("heightadd",0);
         if(str.size()==0){
@@ -211,6 +247,29 @@ public:
                 return true;
             }else{
                 return false;
+            }
+        }else if(str[0]=='>'){
+            auto doc=editor->document();
+            while(true){
+                if(linenum>=0&&doc->findBlockByNumber(linenum).text()[0]=='>'){
+                    linenum--;
+                }else{
+                    linenum++;
+                    break;
+                }
+            }
+            string con;
+            while(true){
+                if(linenum>doc->lineCount()||!(doc->findBlockByNumber(linenum).text()[0]=='>')){
+                    break;
+                }
+                con+=doc->findBlockByNumber(linenum).text().toStdString()+'\n';
+                linenum++;
+            }
+            Block* block=new Block(str);
+            block->setContent(con);
+            if(block->parser()!=-1){
+                WidgetFactory::genWidget(block,wid);
             }
         }else{
             Paragraph* para=new Paragraph(str);

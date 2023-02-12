@@ -18,6 +18,7 @@ public:
         editor->langChanged("markdown");
         viewer=new MarkdownViewer();
         mrender=new MarkdownRender(viewer);
+        mrender->editor=editor;
         mrender->updateHeight(editor->height());
         this->addWidget(editor);
         this->setSpacing(30);
