@@ -6,10 +6,13 @@
 #include<string>
 #include<QMap>
 #include"markdownviewer.h"
+#include<QVariant>
+#include<QFontMetrics>
 using namespace std;
-enum Type{TITLE,LINK};
+enum Type{TITLE,LINK,PARA};
 class Markdown{
 public:
+    int level=0;
     string pstr;
     int pos;
     Type type;
@@ -46,7 +49,6 @@ public:
     HeadTitle(string pstr):Markdown(pstr){
         type=TITLE;
     }
-    int level=0;
     int parser(){
         while(gettoken('#')){//确定标题级别
             level++;
@@ -87,34 +89,61 @@ public:
     }
 };
 
-//class MarkdownRoot:public Markdown{
-//public:
-//    MarkdownRoot(string pstr):Markdown(pstr){}
-//    vector<Markdown*> sons;//存储根节点的孩子节点
-//    int parser(){
-//        while(pos<pstr.size()){
-//            delblank();
-//            if(pstr[pos]=='#'){
-//                HeadTitle* title=new HeadTitle(pstr);
-//                sons.push_back(title);
-//                title->parser();
-//            }else if(pstr[pos]=='['){
-//                Link* link=new Link(pstr);
-//                sons.push_back(link);
-//                link->parser();
-//            }
-//        }
-//    }
-//};
+class Paragraph:public Markdown{
+public:
+    Paragraph(string str):Markdown(str){
+        type=PARA;
+    }
+    int parser(){
+        if(pstr.back()=='\n'){
+            pstr.pop_back();
+        }
+        content=pstr;
+        return 0;
+    }
+};
 
 class WidgetFactory{
 public:
     static QWidget* genWidget(Markdown* md,QWidget* wid){
         if(md->type==TITLE){
             static_cast<QLabel*>(wid)->setText(QString::fromStdString(md->content));
+            wid->setProperty("line",1);
+            QFont font;
+            if(md->level==1){
+                font.setPixelSize(80);
+                font.setBold(true);
+                wid->setFont(font);
+                QFontMetrics fm(font);//用QFontMetrics计算label的高度
+                wid->setProperty("heightadd",fm.height()*1.5);
+            }else if(md->level==2){
+                font.setPixelSize(70);
+                font.setBold(true);
+                wid->setFont(font);
+                QFontMetrics fm(font);//用QFontMetrics计算label的高度
+                wid->setProperty("heightadd",fm.height()*1.5);
+            }else if(md->level==3){
+                font.setPixelSize(60);
+                font.setBold(true);
+                wid->setFont(font);
+                QFontMetrics fm(font);//用QFontMetrics计算label的高度
+                wid->setProperty("heightadd",fm.height()*1.5);
+            }else if(md->level==4){
+                font.setPixelSize(50);
+                font.setBold(true);
+                wid->setFont(font);
+                QFontMetrics fm(font);//用QFontMetrics计算label的高度
+                wid->setProperty("heightadd",fm.height()*1.5);
+            }
             return wid;
         }else if(md->type==LINK){
-            return nullptr;
+            static_cast<QLabel*>(wid)->setText(QString::fromStdString(md->content));
+            wid->setProperty("heightadd",35);
+            return wid;
+        }else if(md->type==PARA){
+            static_cast<QLabel*>(wid)->setText(QString::fromStdString(md->content));
+            wid->setProperty("heightadd",35);
+            return wid;
         }
     }
 };
@@ -122,54 +151,56 @@ public:
 class MarkdownRender{
 public:
     int pos=0;
-    int lines=10;
+    int lines=0;
+    int height=0;
     //MarkdownRoot* root;
     MarkdownViewer* viewer;
     vector<pair<int,Markdown*>> documents;
     MarkdownRender(MarkdownViewer* pview=nullptr){
         viewer=pview;
     }
-//    void render(){
-//        root=new MarkdownRoot(parsestr);//文档根节点
-//        root->parser();
-//    }
+
     void insert(int linenum,const string& str){
-        //QWidget* wid=viewer->wid;
-        QVBoxLayout* lout=viewer->layout;
-        lines+=10;
-        viewer->wid->adjustSize();
-        viewer->wid->setMinimumHeight(lines*35);
-        viewer->wid->setMaximumHeight(lines*35);
-        //QLabel* ll=new QLabel("dfdsf");
-        //viewer->setWidget(ll);
-//        if(linenum<viewer->count()){
-//            QWidget* wid=viewer->getWidget(linenum);
-//            if(wid){
-//                process(str,wid);
-//            }
-////            delete(wid);
-////            if(!wid){
-////                wid=process(str);
-////            }
-////            QLabel* label=new QLabel("hello world");
-////            wid=label;
-////            wid->deleteLater();
-//        }else{
-//            QWidget* wid=new QWidget();
-//            process(str,wid);
-//            viewer->addWidget(wid);
-//        }
+        cout<<linenum<<"  "<<viewer->count()-1<<endl;
+        if(linenum<viewer->count()-1){
+            QWidget* wid=viewer->getWidget(linenum);
+            process(str,wid);
+            viewer->wid->adjustSize();
+        }else{
+            QLabel* wid=new QLabel();
+            if(process(str,wid)){
+                QVBoxLayout* lout=viewer->layout;
+                QLayoutItem* item=lout->itemAt(lout->count()-1);
+                lout->removeItem(item);//删除弹簧
+                lout->addWidget(wid);
+                cout<<static_cast<QLabel*>(wid)->height()<<endl;
+
+                lout->addStretch();//重新添加弹簧
+                cout<<wid->property("heightadd").toInt()<<endl;
+                height+=wid->property("heightadd").toInt();
+                cout<<wid->height()<<endl;
+                viewer->wid->setMinimumHeight(height);
+                viewer->wid->setMaximumHeight(height);
+                viewer->wid->adjustSize();
+            }
+        }
     }
     void updateHeight(int height){
         viewer->reshape(height);
     }
     bool process(const string& str,QWidget* wid){
+        wid->setProperty("line",1);
+        wid->setProperty("heightadd",0);
+        if(str.size()==0){
+            return false;
+        }
         if(str[0]=='#'){
             HeadTitle* title=new HeadTitle(str);
             if(title->parser()!=-1){
                 WidgetFactory::genWidget(title,wid);
                 return true;
             }else{
+                cout<<wid->property("heightadd").toInt()<<endl;
                 return false;
             }
 
@@ -180,6 +211,11 @@ public:
                 return true;
             }else{
                 return false;
+            }
+        }else{
+            Paragraph* para=new Paragraph(str);
+            if(para->parser()!=-1){
+                WidgetFactory::genWidget(para,wid);
             }
         }
     }

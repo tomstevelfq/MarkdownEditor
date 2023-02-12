@@ -1740,8 +1740,12 @@ release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QHBoxLayout \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QWidget \
 		markdownviewer.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QScrollArea \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qscrollarea.h \
 		markdownrender.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QString
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QString \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QVariant \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/QFontMetrics
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o mainwindow.cpp
 
 release/tabeditor.o: tabeditor.cpp tabeditor.h \
